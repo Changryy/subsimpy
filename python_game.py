@@ -4,7 +4,7 @@ pygame.init()
 
 
 
-player = [26,26]
+player = [0,0]
 
 
 RANGE = 51
@@ -28,9 +28,11 @@ for y in range(RANGE): world.append("~"*RANGE)
 
 def set_tile(tile, pos_x, pos_y):
         global world
-        pos_x, pos_y -= RANGE/2+0.5
+        pos_x += (RANGE+1)//2
+        pos_y += (RANGE+1)//2
         for y in range(len(world)):
-                if y+1 == pos_y: world[y] = world[y][:pos_x-1]+tile+world[y][pos_x:]
+                if y+1 == pos_y:
+                        world[y] = world[y][:pos_x-1]+tile+world[y][pos_x:]
 
 
 def move(axis, direction):
@@ -63,6 +65,7 @@ while not done:
         if key_input[pygame.K_LEFT]:
                 player[0] -= 1
         set_tile("+",player[0],player[1])
+        print(player)
 
 
 
